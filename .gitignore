@@ -1,0 +1,14 @@
+node_modules/
+.idea/
+*.log
+
+build/
+dist/
+public/assets/
+/coverage
+/.nyc_output
+**/*.txt
+**/*.xml
+**/*.svg
+dll/
+.DS_Store
