@@ -8,7 +8,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const project = require('./project.config');
 
 const envDev = project.env === 'development';
-const envProd = project.env === 'production';
 const devtool = project.sourceMap ? 'cheap-source-map' : false;
 
 const SRC_DIR = path.join(project.basePath, project.srcDir);
@@ -146,78 +145,4 @@ const config = {
 	],
 
 }
-
-//
-// if (envDev) {
-// 	config.module.rules.push({
-// 		test: /\.(sa|sc|c)ss$/,
-// 		use: [
-// 			'style-loader',
-// 			'css-loader',
-// 			{
-// 				loader: 'postcss-loader',
-// 				options: {
-// 					config: {
-// 						path: path.join(project.basePath, 'postcss.config.js')
-// 					}
-// 				}
-// 			},
-// 			'sass-loader'
-// 		]
-// 	})
-// 	config.entry.main.push(
-// 		'webpack-hot-middleware/client?path=./__webpack_hmr'
-// 	)
-// 	config.plugins.push(
-// 		// new webpack.NoEmitOnErrorsPlugin(),
-// 		// new webpack.HotModuleReplacementPlugin(),
-//
-// 		// new MiniCssExtractPlugin({
-// 		// 	filename     : '[name].css',
-// 		// 	chunkFilename: '[id].css'
-// 		// }),
-// 		new MiniCssExtractPlugin({
-// 			filename     : "css/main.[chunkhash:5].css",
-// 			chunkFilename: 'css/main.[contenthash:5].css'
-// 		}),
-// 		// new CopyWebpackPlugin([{
-// 		// 	from : path.join(project.basePath,'../dll'),
-// 		// 	to   : path.join(project.basePath, project.outDir)
-// 		// }])
-// 	)
-// }
-//
-// if (envDev) {
-// 	config.module.rules.push({
-// 		test:/\.(sa|sc|c)ss$/,
-// 		use :[
-//
-// 			MiniCssExtractPlugin.loader,
-// 			{
-// 				loader : 'css-loader',
-// 			},
-// 			{
-// 				loader: 'postcss-loader',
-// 				options: {
-// 					config: {
-// 						path: path.join(project.basePath, 'postcss.config.js')
-// 					}
-// 				}
-// 			},
-// 			{
-// 				loader: 'sass-loader'
-// 			}
-// 		]
-// 	})
-// 	config.plugins.push(
-// 		new MiniCssExtractPlugin({
-// 			filename     : "[name].css",
-// 			chunkFilename: "[id].css"
-// 		}),
-// 		new CopyWebpackPlugin([{
-// 			from : path.join(project.basePath,'../dll'),
-// 			to   : path.join(project.basePath,'../dist','dll')
-// 		}])
-// 	)
-// }
 module.exports = config;
