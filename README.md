@@ -1,9 +1,28 @@
-Staging for `webpack 4 + react + express`   
+STAGING: WEBPACK 4
+------
+This is for `react` + `express` project
+Local port; 9000
 
-local port: 9000  
-
-#### Step1: npm run dll  
-_Modify: src/index.html vendor's path_  
-
-#### Step2: npm run build  
-#### Step3: npm run start
+#### Quick start
+--------
+##### Clone
+```
+  git@github.com:NZMia/webpack_staging.git
+```
+##### Install
+```
+  npm install
+```
+##### Dll
+_The vendor needs to be packaged once when the first time running. Repackage it if dependencies change._
+```
+  npm run dll
+```
+##### Build
+```
+  npm run build
+```
+##### Start
+```
+  npm run Start
+```
