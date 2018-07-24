@@ -8,6 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const project = require('./project.config');
 
 const envDev = project.env === 'development';
+const envPro = project.env === 'production';
 const devtool = project.sourceMap ? 'cheap-source-map' : false;
 
 const SRC_DIR = path.join(project.basePath, project.srcDir);
@@ -38,7 +39,7 @@ const config = {
 			'src': SRC_DIR
 		},
 
-		extensions: ['*','.js', '.jsx', '.json', '.less', '.scss', '.css']
+		extensions: ['*','.js', '.jsx', '.json', '.vue','.less', '.scss', '.css']
 	},
 
 	module: {
@@ -123,16 +124,6 @@ const config = {
 			manifest: path.resolve(project.basePath, '../dll', 'manifest.json')
 		}),
 
-		new MiniCssExtractPlugin({
-			filename: envDev ? '[name].css' : '[name].[hash].css',
-			chunkFilename: envDev ? '[id].css' : '[id].[hash].css',
-		}),
-
-		new CopyWebpackPlugin([{
-			from : path.join(project.basePath,'../dll'),
-			to   : path.join(project.basePath,'../dist','dll')
-		}]),
-
 		new HtmlWebpackPlugin({
 			template : 'src/index.html',
 			inject   : true,
@@ -144,5 +135,35 @@ const config = {
 		})
 	],
 
+};
+
+if(envDev){
+	config.plugins.push(
+		new MiniCssExtractPlugin({
+			filename: '[name].css',
+			chunkFilename: '[id].css'
+		}),
+	)
 }
+
+if(envPro) {
+	config.plugins.push(
+		new MiniCssExtractPlugin({
+			filename: '[name].[hash].css',
+			chunkFilename: '[name].[hash].css'
+		}),
+		new CopyWebpackPlugin([{
+			from : path.join(project.basePath,'../dll'),
+			to   : path.join(project.basePath,'../dist','dll')
+		}]),
+
+		new HtmlWebpackPlugin({
+			minify   : {
+				collapseWhitespace: true,
+				ignoreCustomComments: [ /^!/ ]
+			}
+		})
+	)
+}
+
 module.exports = config;
